@@ -2,6 +2,7 @@ import Navbar from "../layouts/Navbar";
 import stock1 from "../../assets/stock2.jpg";
 import Footer from "../layouts/Footer";
 import BackToTop from "../features/BackToTop";
+import FAQ from "./FAQ"
 
 export default function Home() {
   return (
@@ -214,6 +215,9 @@ export default function Home() {
               <span className="text-xs text-gray-400 italic">+5 fitur add-on tersedia</span>
             </div>
           </div>
+
+          <FAQ />
+
           {/* Add-on Note */}
           <div className="mt-10 text-center">
             <p className="text-sm text-gray-500">
