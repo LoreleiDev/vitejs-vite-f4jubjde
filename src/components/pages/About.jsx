@@ -1,4 +1,3 @@
-//About
 import {
   Sparkles,
   Search,

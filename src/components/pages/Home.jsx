@@ -1,4 +1,3 @@
-//Home
 import Navbar from "../layouts/Navbar";
 import Hero from "../layouts/Hero";
 import Service from "../layouts/Service";

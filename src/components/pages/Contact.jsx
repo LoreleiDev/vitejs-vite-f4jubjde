@@ -1,4 +1,3 @@
-//Contact
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import Navbar from "../layouts/Navbar";
@@ -60,7 +59,7 @@ export default function Contact() {
     return (
         <>
             <Navbar />
-            <div className="select-none min-h-screen bg-white text-gray-900 py-20 px-4 md:px-8 lg:px-16">
+            <div className="mt-16 select-none min-h-screen bg-white text-gray-900 py-20 px-4 md:px-8 lg:px-16">
                 <div className="max-w-6xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
