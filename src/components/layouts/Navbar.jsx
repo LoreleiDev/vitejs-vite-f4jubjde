@@ -9,7 +9,7 @@ export default function Navbar() {
     const location = useLocation();
 
     const navLinks = [
-        { name: 'Beranda', href: '/' },
+        { name: 'Beranda', href: '/home' },
         { name: 'Tentang', href: '/about-us' },
         { name: 'Layanan', href: '/services' },
         { name: 'Kontak', href: '/contact' },
@@ -72,7 +72,7 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-16">
 
                     {/* Logo */}
-                    <Link to="/" className="flex items-center space-x-2 group">
+                    <Link to="/home" className="flex items-center space-x-2 group">
                         <img
                             src="/logo.webp"
                             alt="Logo"

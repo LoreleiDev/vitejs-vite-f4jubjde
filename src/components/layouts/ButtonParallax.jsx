@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function ButtonParallax() {
     return (
         <>
-            <Link href="/kontak" className="select-none block w-full">
+            <Link to="/kontak" className="select-none block w-full">
                 <section className="w-full flex items-center justify-center -mt-8 relative z-10 px-4">
                     <div className="w-full max-w-7xl h-40 md:h-48 relative group cursor-pointer rounded-xl shadow-2xl overflow-hidden">
                         <div className="absolute inset-0 overflow-hidden">

@@ -12,7 +12,7 @@ export default function Hero() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
-                        href="/contact"
+                        to="/contact"
                         className="justify-center group relative px-8 py-3 bg-white text-[#5B23FF] rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 inline-flex items-center gap-2 overflow-hidden"
                     >
                         <span className="relative z-10">Konsultasi Gratis</span>
@@ -21,7 +21,7 @@ export default function Hero() {
                         </svg>
                     </Link>
                     <Link
-                        href="/services"
+                        to="/services"
                         className="px-8 py-3 border-2 border-white/30 text-white rounded-lg font-semibold hover:bg-white/10 hover:border-white/50 transition-all duration-300"
                     >
                         Lihat Layanan

@@ -44,7 +44,7 @@ export default function Footer() {
                             {services.map((item) => (
                                 <li key={item.name}>
                                     <Link
-                                        href={item.href}
+                                        to={item.href}
                                         className="text-gray-400 hover:text-white text-sm transition-colors duration-200 inline-block hover:translate-x-1 transform"
                                     >
                                         {item.name}
@@ -61,7 +61,7 @@ export default function Footer() {
                             {company.map((item) => (
                                 <li key={item.name}>
                                     <Link
-                                        href={item.href}
+                                        to={item.href}
                                         className="text-gray-400 hover:text-white text-sm transition-colors duration-200 inline-block hover:translate-x-1 transform"
                                     >
                                         {item.name}
