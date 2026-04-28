@@ -81,7 +81,7 @@ export default function Services() {
               Layanan Kami
             </h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Pilih paket dasar yang sesuai, lalu kustomisasi fitur tambahan sesuai kebutuhan bisnis Anda.
+              Pilih paket dasar yang sesuai, lalu kustomisasi fitur tambahan sesuai kebutuhan Anda. Harga bisa di berubah tergantung fitur yang dibutuhkan.
             </p>
           </div>
 
