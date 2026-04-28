@@ -9,7 +9,7 @@ export default function Navbar() {
     const location = useLocation();
 
     const navLinks = [
-        { name: 'Beranda', href: '/home' },
+        { name: 'Beranda', href: '/' },
         { name: 'Tentang', href: '/about-us' },
         { name: 'Layanan', href: '/services' },
         { name: 'Kontak', href: '/contact' },
