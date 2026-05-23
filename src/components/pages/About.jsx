@@ -12,7 +12,7 @@ import ButtonParallaxAbout from "../layouts/ButtonParallaxAbout";
 import SEO from "../SEO/SEO";
 
 export default function About3() {
-  const whatsappLink = "https://wa.me/6285174116973?text=Halo%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20website";
+  const whatsappLink = "https://wa.me/6285174116973?text=Halo%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20di%20Averant%20Team.%20Bisakah%20saya%20mendapatkan%20informasi%20lebih%20lanjut%3F";
   return (
     <>
       <SEO

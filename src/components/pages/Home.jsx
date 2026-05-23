@@ -9,6 +9,7 @@ import ProcessSection from "../layouts/ProcessSection";
 import BackToTop from "../features/BackToTop";
 
 import SEO from "../SEO/SEO";
+import HowToOrderSection from "../layouts/HowToOrder";
 
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
       <Hero />
       <ButtonParallax />
       <Service />
+      <HowToOrderSection />
       <ProcessSection />
       <FAQ />
       <Footer />

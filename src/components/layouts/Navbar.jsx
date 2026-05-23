@@ -15,34 +15,44 @@ export default function Navbar() {
         { name: 'Kontak', href: '/contact' },
     ];
 
-
     const handleLinkClick = (e, href) => {
-        if (!href.includes('#')) return;
-
         e.preventDefault();
 
-        const hash = href.split('#')[1];
-        const basePath = href.split('#')[0] || '/';
+
+        const hashIndex = href.indexOf('#');
+        const basePath = hashIndex === -1 ? href : (href.substring(0, hashIndex) || '/');
+        const hash = hashIndex === -1 ? undefined : href.substring(hashIndex + 1);
+
 
         const scrollToTarget = () => {
-            if (!hash) {
+
+            if (!hash || hash.trim() === '' || hash === '/') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
-                const el = document.getElementById(hash);
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                const targetEl = document.getElementById(hash);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         };
 
 
-        const currentPath = location.pathname === '/' ? '/' : location.pathname;
+        const currentPath = location.pathname || '/';
+        const normalizedCurrent = currentPath.endsWith('/') && currentPath.length > 1
+            ? currentPath.slice(0, -1)
+            : currentPath;
+        const normalizedBase = basePath.endsWith('/') && basePath.length > 1
+            ? basePath.slice(0, -1)
+            : basePath;
 
-        if (currentPath === basePath) {
+        if (normalizedCurrent === normalizedBase) {
 
             scrollToTarget();
         } else {
 
-            navigate(basePath);
-            setTimeout(scrollToTarget, 150);
+            navigate(href);
+            setTimeout(scrollToTarget, 100);
         }
 
         setIsOpen(false);
@@ -71,8 +81,12 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
 
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center space-x-2 group">
+                    {/* Logo - ✅ FIX: Tambah onClick handleLinkClick */}
+                    <Link
+                        to="/"
+                        onClick={(e) => handleLinkClick(e, '/')}
+                        className="flex items-center space-x-2 group cursor-pointer"
+                    >
                         <img
                             src="/logo.webp"
                             alt="Logo"

@@ -19,16 +19,57 @@ export default function Contact() {
 
     const services = [
         'Konsultasi Desain',
-        'Pemesanan Produk',
-        'Layanan Custom',
+        'Konsultasi Website',
+        'Pemesanan Website',
+        'Pemesanan Design',
         'Pertanyaan Umum',
     ];
 
+    // ✅ Template pesan otomatis
+    const websiteTemplate = `Halo Averant Team! 👋
+
+Saya ingin konsultasi tentang proses pengerjaan *Website*.
+
+📋 Detail Kebutuhan:
+• Tujuan Website: 
+• Fitur yang dibutuhkan: 
+• Referensi website (jika ada): 
+• Framework/Platform yang diinginkan (jika ada): 
+• Deadline (Minimal pesanan 3 hari sebelum tanggal deadline): 
+• Budget estimasi: 
+
+Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
+
+    const designTemplate = `Halo Averant Team! 👋
+
+Saya ingin konsultasi tentang proses pengerjaan *Design*.
+
+📋 Detail Kebutuhan:
+• Tujuan Desain: 
+• Ukuran/Format yang dibutuhkan: 
+• Referensi desain (jika ada): 
+• Deadline: 
+
+Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
+
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        const { name, value } = e.target;
+        
+        // ✅ Jika service berubah, langsung update message sesuai template (atau kosong)
+        if (name === 'service') {
+            let newMessage = '';
+            
+            if (value === 'Pemesanan Website') {
+                newMessage = websiteTemplate;
+            } else if (value === 'Pemesanan Design') {
+                newMessage = designTemplate;
+            }
+            // Jika layanan lain, message tetap kosong
+            
+            setFormData(prev => ({ ...prev, service: value, message: newMessage }));
+        } else {
+            setFormData(prev => ({ ...prev, [name]: value }));
+        }
     };
 
     const handleSubmit = (e) => {
@@ -43,7 +84,6 @@ export default function Contact() {
             .then((result) => {
                 console.log('Email sent:', result.text);
                 
-                // SweetAlert Success
                 Swal.fire({
                     title: 'Berhasil!',
                     text: 'Terima kasih! Pesan Anda telah terkirim. Kami akan menghubungi Anda segera.',
@@ -54,13 +94,11 @@ export default function Contact() {
                     timerProgressBar: true,
                 });
                 
-                // Reset form
                 setFormData({ name: '', email: '', phone: '', service: '', message: '' });
                 if (formRef.current) formRef.current.reset();
             }, (error) => {
                 console.error('Failed to send:', error.text);
                 
-                // SweetAlert Error
                 Swal.fire({
                     title: 'Gagal!',
                     text: 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.',
@@ -155,13 +193,22 @@ export default function Contact() {
                                     <label className="block text-sm font-medium mb-2 text-gray-700">Pesan *</label>
                                     <textarea
                                         name="message"
-                                        rows="5"
+                                        rows="8"
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5B23FF]/20 focus:border-[#5B23FF] transition-all duration-200 text-gray-900 placeholder-gray-400 resize-vertical"
-                                        placeholder="Ceritakan detail konsultasi atau pesanan Anda..."
+                                        // ✅ Font normal (tanpa font-mono), leading-relaxed agar nyaman dibaca
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5B23FF]/20 focus:border-[#5B23FF] transition-all duration-200 text-gray-900 placeholder-gray-400 resize-vertical leading-relaxed"
+                                        placeholder={formData.service === 'Pemesanan Website' || formData.service === 'Pemesanan Design' 
+                                            ? "Template akan muncul otomatis..." 
+                                            : "Ceritakan detail konsultasi atau pesanan Anda..."}
                                     ></textarea>
+                                    {/* Helper text */}
+                                    {(formData.service === 'Pemesanan Website' || formData.service === 'Pemesanan Design') && (
+                                        <p className="text-xs text-gray-500 mt-1.5">
+                                            💡 Edit bagian yang kosong, lalu kirim.
+                                        </p>
+                                    )}
                                 </div>
                                 <button
                                     type="submit"
@@ -213,10 +260,10 @@ export default function Contact() {
                                         <h3 className="font-semibold text-gray-900 mb-1">Telepon</h3>
                                         <div className="space-y-1">
                                             <a href="tel:085174116973" className="block text-gray-600 hover:text-[#5B23FF] transition-colors">
-                                                0851-7411-6973
+                                                0851-7411-6973 - Radit
                                             </a>
-                                            <a href="tel:081359001002" className="block text-gray-600 hover:text-[#5B23FF] transition-colors">
-                                                0813-5900-1002
+                                            <a href="tel:085708079312" className="block text-gray-600 hover:text-[#5B23FF] transition-colors">
+                                                0857-0807-9312 - Denis
                                             </a>
                                         </div>
                                     </div>

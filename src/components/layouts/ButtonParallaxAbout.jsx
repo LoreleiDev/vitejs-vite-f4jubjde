@@ -27,7 +27,7 @@ export default function ButtonParallaxAbout() {
                         <div className="relative z-10 flex items-center justify-center h-full text-center px-4">
                             <div className="transform transition-all duration-500 group-hover:scale-105">
                                 <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">
-                                    Siap Membangun Website Anda?
+                                    Siap Membangun Kebutuhan Digital Anda?
                                 </h2>
                                 <p className="text-white/90 mb-6 text-sm md:text-base">
                                     Konsultasikan kebutuhan digital Anda bersama kami.

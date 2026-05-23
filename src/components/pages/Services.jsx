@@ -1,20 +1,43 @@
 import {
-  Monitor,
-  Building2,
-  Image,
-  Palette,
-  Bot,
-  Check,
-  ArrowRight,
-  Globe,
-
+  Monitor, Building2, Image, Palette, Bot,
+  Check, ArrowRight, Globe, FileImage, ImagePlus, Smartphone, PenTool
 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import stock1 from "../../assets/stock2.jpg";
 import BackToTop from "../features/BackToTop";
 
-const services = [
+const encodeWhatsAppText = (text) => encodeURIComponent(text);
+
+const createWebsiteMessage = (serviceName) => `Halo Averant Team! 
+
+Saya tertarik dengan paket: *${serviceName}*
+
+Detail Kebutuhan Website:
+• Tujuan Website: 
+• Fitur yang dibutuhkan: 
+• Referensi website (jika ada): 
+• Framework/Platform yang diinginkan (jika ada): 
+• Deadline (Minimal pesanan 3 hari sebelum tanggal deadline): 
+• Budget estimasi: 
+
+Mohon informasikan langkah selanjutnya. Terima kasih! `;
+
+const createDesignMessage = (serviceName) => `Halo Averant Team! 
+
+Saya tertarik dengan paket: *${serviceName}*
+
+Detail Kebutuhan Desain:
+• Tujuan Desain: 
+• Ukuran/Format yang dibutuhkan: 
+• Referensi desain (jika ada): 
+• Deadline:  
+
+Mohon informasikan langkah selanjutnya. Terima kasih! `;
+
+const websiteServices = [
   {
     id: 1,
     icon: Monitor,
@@ -23,7 +46,8 @@ const services = [
     features: ["1 Halaman Utama", "Mobile Friendly", "Basic SEO"],
     addOns: 10,
     price: "1.500.000",
-    bestFor: ["Startup launching produk", "Campaign iklan", "Webinar promotion"]
+    bestFor: ["Startup launching produk", "Campaign iklan", "Webinar promotion"],
+    whatsappMessage: createWebsiteMessage("Landing Pages")
   },
   {
     id: 2,
@@ -33,7 +57,8 @@ const services = [
     features: ["5 Halaman Standar", "Form Kontak", "Mobile Responsive"],
     addOns: 12,
     price: "3.500.000",
-    bestFor: ["Perusahaan established", "UMKM go digital", "Professional services"]
+    bestFor: ["Perusahaan established", "UMKM go digital", "Professional services"],
+    whatsappMessage: createWebsiteMessage("Company Profile")
   },
   {
     id: 3,
@@ -43,7 +68,8 @@ const services = [
     features: ["Galeri Portfolio", "Lightbox Preview", "SEO Optimized"],
     addOns: 8,
     price: "2.500.000",
-    bestFor: ["Freelance designers", "Photographers", "Creative agencies"]
+    bestFor: ["Freelance designers", "Photographers", "Creative agencies"],
+    whatsappMessage: createWebsiteMessage("Portofolio Website")
   },
   {
     id: 4,
@@ -53,46 +79,148 @@ const services = [
     features: ["Desain Full Custom", "Admin Dashboard", "Database Integration"],
     addOns: 15,
     price: "7.500.000",
-    bestFor: ["E-commerce", "SaaS platforms", "Enterprise solutions"]
+    bestFor: ["E-commerce", "SaaS platforms", "Enterprise solutions"],
+    whatsappMessage: createWebsiteMessage("Custom Website")
+  }
+];
+
+const designServices = [
+  {
+    id: 101,
+    icon: FileImage,
+    title: "Design Flyer & Poster",
+    description: "Materi promosi cetak & digital yang eye-catching untuk event, promo, atau branding bisnis.",
+    features: ["Resolusi Print & Digital", "Revisi 2x", "Format Siap Cetak"],
+    addOns: 5,
+    price: "350.000",
+    bestFor: ["Event organizer", "Promo bisnis", "Campaign sosial media"],
+    whatsappMessage: createDesignMessage("Design Flyer & Poster")
   },
   {
-    id: 5,
-    icon: Bot,
-    title: "Chatbot AI",
-    description: "Asisten virtual 24/7 yang bisa jawab FAQ, bantu pelanggan, dan terintegrasi website/WhatsApp.",
-    features: ["AI FAQ Training", "Website Chat Widget", "Live Chat Handover"],
-    addOns: 5,
-    price: "2.000.000",
-    bestFor: ["Customer service", "E-commerce stores", "High-traffic websites"]
+    id: 102,
+    icon: ImagePlus,
+    title: "Design Banner",
+    description: "Spanduk digital atau cetak dengan komposisi visual menarik untuk iklan, pameran, atau header web.",
+    features: ["Layout High-Impact", "Responsive Web/Offline", "Quick Turnaround"],
+    addOns: 8,
+    price: "500.000",
+    bestFor: ["Iklan online", "Pameran offline", "Header website"],
+    whatsappMessage: createDesignMessage("Design Banner")
+  },
+  {
+    id: 103,
+    icon: Smartphone,
+    title: "IG Feed & Story",
+    description: "Konten visual konsisten & engaging untuk meningkatkan engagement dan brand awareness di Instagram.",
+    features: ["Template Konsisten", "Story Highlight Cover", "Panduan Visual IG"],
+    addOns: 15,
+    price: "750.000",
+    bestFor: ["Brand Instagram", "Influencer", "UMKM online"],
+    whatsappMessage: createDesignMessage("IG Feed & Story")
+  },
+  {
+    id: 104,
+    icon: PenTool,
+    title: "Design Logo",
+    description: "Identitas visual unik, profesional, dan mudah diingat yang merepresentasikan nilai brand Anda.",
+    features: ["3 Konsep Awal", "File Vector (AI/SVG)", "Brand Guideline Mini"],
+    addOns: 6,
+    price: "1.200.000",
+    bestFor: ["Brand baru", "Rebranding", "Startup"],
+    whatsappMessage: createDesignMessage("Design Logo")
   }
 ];
 
 export default function Services() {
-  const whatsappLink = "https://wa.me/6285174116973?text=Halo%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20website";
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState('website');
+  const whatsappNumber = "6285174116973";
+
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    const params = new URLSearchParams(location.search);
+    const section = params.get('section') || hash;
+
+    if (section === 'design' || section === 'website') {
+      setActiveSection(prev => {
+        if (prev !== section) {
+          return section;
+        }
+        return prev;
+      });
+    }
+  }, [location]);
+
+  const handleSectionChange = (section) => {
+    if (activeSection !== section) {
+      setActiveSection(section);
+      navigate(`/services?section=${section}#${section}`, { replace: true });
+    }
+  };
+
+  const currentServices = activeSection === 'website' ? websiteServices : designServices;
+  const sectionTitle = activeSection === 'website' ? 'Layanan Website' : 'Layanan Desain Grafis';
+  const sectionDesc = activeSection === 'website'
+    ? 'Pilih paket dasar yang sesuai, lalu kustomisasi fitur tambahan sesuai kebutuhan Anda. Harga bisa berubah tergantung fitur yang dibutuhkan.'
+    : 'Visual yang kuat adalah kunci branding. Pilih kategori desain yang Anda butuhkan, kami eksekusi dengan presisi dan revisi hingga puas.';
 
   return (
     <>
       <Navbar />
-      <section className="py-20 px-4 bg-gray-50 mt-10 select-none">
+
+      <section className="py-20 px-4 bg-gray-50 mt-10 select-none" id="services">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
+
+          {/* Section Toggle - Pill Style */}
+          <div className="flex justify-center mb-10" id="section-toggle">
+            <div className="inline-flex bg-white/80 backdrop-blur-sm p-1.5 rounded-2xl border border-gray-200/60 shadow-sm">
+              <button
+                onClick={() => handleSectionChange('website')}
+                className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${activeSection === 'website'
+                  ? 'bg-slate-900 text-white shadow-md scale-[1.02]'
+                  : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                  }`}
+              >
+                <Monitor className="w-4 h-4" />
+                Website
+              </button>
+              <button
+                onClick={() => handleSectionChange('design')}
+                className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${activeSection === 'design'
+                  ? 'bg-slate-900 text-white shadow-md scale-[1.02]'
+                  : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                  }`}
+              >
+                <Palette className="w-4 h-4" />
+                Design
+              </button>
+            </div>
+          </div>
+
+          {/* Header - Dynamic */}
+          <div className="text-center max-w-3xl mx-auto mb-12" id={activeSection}>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Layanan Kami
+              {sectionTitle}
             </h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Pilih paket dasar yang sesuai, lalu kustomisasi fitur tambahan sesuai kebutuhan Anda. Harga bisa di berubah tergantung fitur yang dibutuhkan.
+              {sectionDesc}
             </p>
           </div>
 
-          {/* Services Grid */}
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mb-20">
-            {services.map((service) => {
+          <div
+            key={activeSection}
+            className={`grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${activeSection === 'website' ? 'xl:grid-cols-4' : 'xl:grid-cols-4'
+              } justify-items-center mb-16 transition-all duration-400 ease-out`}
+          >
+            {currentServices.map((service) => {
               const Icon = service.icon;
+              const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeWhatsAppText(service.whatsappMessage)}`;
+
               return (
                 <div
                   key={service.id}
-                  className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 hover:shadow-lg transition-all duration-200 flex flex-col"
+                  className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 hover:shadow-lg transition-all duration-200 flex flex-col w-full max-w-sm"
                 >
                   {/* Icon Container */}
                   <div className="w-11 h-11 flex items-center justify-center rounded-lg mb-3 bg-slate-100 text-slate-600">
@@ -147,7 +275,7 @@ export default function Services() {
                   {/* Price & Button */}
                   <div className="border-t border-gray-100 pt-4 mt-auto">
                     <div className="text-center mb-4">
-                      <p className="text-sm text-gray-500 mb-1">Mulai Dari</p>
+                      <p className="text-sm text-gray-500 mb-1">Perkiraan Harga:</p>
                       <p className="text-2xl font-bold text-gray-900">
                         Rp {service.price}
                       </p>
@@ -167,15 +295,17 @@ export default function Services() {
             })}
           </div>
 
-          {/* CTA Section */}
+          {/* CTA Banner - Generic WhatsApp Link */}
           <a
-            href={whatsappLink}
+            href={`https://wa.me/${whatsappNumber}?text=${encodeWhatsAppText(`Halo Averant Team! 
+
+Saya ingin konsultasi tentang layanan di Averant Team. Bisakah saya mendapatkan informasi lebih lanjut?`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="select-none block w-full pb-5"
           >
             <section className="w-full flex items-center justify-center relative z-10 px-4">
-              <div className="w-full max-w-7xl h-40 md:h-48 relative group cursor-pointer rounded-xl shadow-2xl overflow-hidden">
+              <div className="w-full max-w-7xl mx-auto h-40 md:h-48 relative group cursor-pointer rounded-xl shadow-2xl overflow-hidden">
                 <div className="absolute inset-0 overflow-hidden">
                   <div
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -214,6 +344,7 @@ export default function Services() {
           </a>
         </div>
       </section>
+
       <Footer />
       <BackToTop />
     </>
