@@ -75,7 +75,7 @@ export default function ButtonParallax() {
                                     backgroundAttachment: 'fixed',
                                 }}
                             ></div>
-                            <div className="absolute inset-0 bg-linear-to-r from-[#7C3AED]/90 to-[#A855F7]/90 transition-all duration-300 group-hover:opacity-100 opacity-80"></div>
+                            <div className="absolute inset-0 bg-linear-to-r from-purple-500 to-purple-400 transition-all duration-300 group-hover:opacity-100 opacity-80"></div>
                         </div>
 
                         {/* Orbit Animation */}
