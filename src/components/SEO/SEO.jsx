@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async'
 export default function SEO({
     title = 'Averant Team - Jasa Website & Desain Grafis Profesional Surabaya',
     description = 'Jasa pembuatan website dan desain grafis profesional di Surabaya. Landing page, company profile, logo, flyer & sosial media. Harga terjangkau, hasil berkualitas. Konsultasi gratis!',
-    image = '/logo.png',
+    image = '/logo.webp',
     url = 'https://averantteam.com',
     noindex = false,
     keywords = 'jasa website surabaya, jasa desain grafis, pembuatan landing page, desain logo, company profile, flyer design, instagram feed, jasa web developer, digital agency surabaya',
@@ -67,13 +67,13 @@ export default function SEO({
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://averantteam.com"
+                "item": "https://averanteam.com"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": serviceName,
-                "item": "https://averantteam.com/services"
+                "item": "https://averanteam.com/services"
             }
         ]
     }
@@ -139,7 +139,7 @@ export default function SEO({
             <meta name="twitter:image" content={image} />
 
             {/* 🔹 Canonical URL */}
-            {url && url !== 'https://averantteam.com' && (
+            {url && url !== 'https://averanteam.com' && (
                 <link rel="canonical" href={url} />
             )}
 
