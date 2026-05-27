@@ -11,7 +11,7 @@ export default function Hero() {
 
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 {/* Headline */}
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-poppins font-extrabold mb-6 leading-tight tracking-tight">
                     Wujudkan <span className="text-yellow-300">Website & Desain </span><br className="hidden md:block" />
                     impian anda!
                 </h1>
@@ -25,7 +25,7 @@ export default function Hero() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Link
                         to="/services?section=website#website"
-                        className="group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-white text-[#5B23FF] font-semibold rounded-xl shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/30 hover:-translate-y-0.5 transition-all duration-300"
+                        className="group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-white text-[#5B23FF] font-semibold font-poppins rounded-xl shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/30 hover:-translate-y-0.5 transition-all duration-300"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

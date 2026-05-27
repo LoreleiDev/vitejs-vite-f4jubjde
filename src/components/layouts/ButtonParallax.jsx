@@ -47,11 +47,11 @@ export default function ButtonParallax() {
                                 <svg className="w-7 h-7 mx-auto text-white mb-1 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
-                                <h2 className="text-sm md:text-base lg:text-lg font-bold text-white mb-1 leading-tight">
+                                <h2 className="text-sm md:text-base lg:text-lg font-poppins font-bold text-white mb-1 leading-tight">
                                     Jasa Pembuatan Website
                                 </h2>
 
-                                <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white text-[#5B23FF] rounded-lg text-xs md:text-sm font-semibold shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:gap-2.5 hover:bg-blue-600 hover:text-white">
+                                <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white text-[#5B23FF] rounded-lg text-xs md:text-sm font-poppins font-semibold shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:gap-2.5 hover:bg-blue-600 hover:text-white">
                                     Pesan Sekarang
                                     <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -104,10 +104,10 @@ export default function ButtonParallax() {
                                 <svg className="w-7 h-7 mx-auto text-white mb-1 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                                 </svg>
-                                <h2 className="text-sm md:text-base lg:text-lg font-bold text-white mb-1 leading-tight">
+                                <h2 className="text-sm md:text-base lg:text-lg font-poppins font-bold text-white mb-1 leading-tight">
                                     Jasa Desain Grafis
                                 </h2>
-                                <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white text-[#7C3AED] rounded-lg text-xs md:text-sm font-semibold shadow-lg group-hover:shadow-xl transition-all group-hover:gap-2.5">
+                                <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white text-[#7C3AED] rounded-lg text-xs md:text-sm font-poppins font-semibold shadow-lg group-hover:shadow-xl transition-all group-hover:gap-2.5">
                                     Pesan Sekarang
                                     <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
