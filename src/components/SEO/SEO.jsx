@@ -67,13 +67,13 @@ export default function SEO({
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://averanteam.com"
+                "item": "https://averanteam.web.id"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": serviceName,
-                "item": "https://averanteam.com/services"
+                "item": "https://averanteam.web.id/services"
             }
         ]
     }
@@ -139,7 +139,7 @@ export default function SEO({
             <meta name="twitter:image" content={image} />
 
             {/* 🔹 Canonical URL */}
-            {url && url !== 'https://averanteam.com' && (
+            {url && url !== 'https://averanteam.web.id' && (
                 <link rel="canonical" href={url} />
             )}
 
