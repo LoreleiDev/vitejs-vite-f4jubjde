@@ -8,6 +8,7 @@ import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import stock1 from "../../assets/stock2.jpg";
 import BackToTop from "../features/BackToTop";
+import SEO from "../SEO/SEO";
 
 const encodeWhatsAppText = (text) => encodeURIComponent(text);
 
@@ -175,6 +176,22 @@ export default function Services() {
 
   return (
     <>
+      <SEO
+        serviceName={activeSection === 'website' ? 'Jasa Pembuatan Website' : 'Jasa Desain Grafis'}
+        title={activeSection === 'website'
+          ? 'Layanan Website Profesional - Averant Team'
+          : 'Layanan Desain Grafis Profesional - Averant Team'
+        }
+        description={activeSection === 'website'
+          ? 'Jasa pembuatan website: landing page, company profile, portofolio, custom website. Harga terjangkau, konsultasi gratis!'
+          : 'Jasa desain grafis: logo, flyer, banner, Instagram feed. Desain profesional, revisi puas, hasil cepat!'
+        }
+        url="https://averantteam.com/services"
+        keywords={activeSection === 'website'
+          ? 'jasa website surabaya, landing page, company profile, web developer'
+          : 'jasa desain grafis, desain logo, flyer design, instagram feed'
+        }
+      />
       <Navbar />
 
       <section className="py-20 px-4 bg-gray-50 mt-10 select-none font-poppins" id="services">
@@ -321,8 +338,8 @@ export default function Services() {
                 <span className="text-blue-600 text-xs font-bold font-poppins">ℹ️</span>
               </div>
               <p className="text-sm text-blue-800 font-poppins leading-relaxed">
-                <strong className="font-semibold font-poppins">Catatan Harga:</strong> Harga yang tertera adalah estimasi awal dan dapat dinegosiasikan. 
-                Final pricing akan disesuaikan setelah diskusi mendalam mengenai kelengkapan fitur, kompleksitas proyek, timeline, dan kebutuhan spesifik Anda. 
+                <strong className="font-semibold font-poppins">Catatan Harga:</strong> Harga yang tertera adalah estimasi awal dan dapat dinegosiasikan.
+                Final pricing akan disesuaikan setelah diskusi mendalam mengenai kelengkapan fitur, kompleksitas proyek, timeline, dan kebutuhan spesifik Anda.
                 Jangan ragu untuk konsultasi gratis via WhatsApp untuk mendapatkan penawaran terbaik! 🤝
               </p>
             </div>

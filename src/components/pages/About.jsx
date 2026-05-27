@@ -16,8 +16,8 @@ export default function About3() {
   return (
     <>
       <SEO
-        title="Jasa Pembuatan Website Surabaya | Averant Team"
-        description="Averant Team adalah penyedia jasa pembuatan website profesional di Surabaya. Kami membantu bisnis & UMKM go digital dengan solusi web modern, cepat, dan harga terjangkau."
+        title="Jasa Pembuatan Website dan Desain Grafis Surabaya | Averant Team"
+        description="Averant Team adalah penyedia jasa pembuatan website dan desain grafis di Surabaya. Kami membantu bisnis & UMKM go digital dengan solusi web modern, cepat, dan harga terjangkau."
       />
       <Navbar />
       <div className="bg-white select-none">

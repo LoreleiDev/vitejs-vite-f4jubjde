@@ -55,7 +55,6 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
     const handleChange = (e) => {
         const { name, value } = e.target;
         
-        // ✅ Jika service berubah, langsung update message sesuai template (atau kosong)
         if (name === 'service') {
             let newMessage = '';
             
@@ -64,8 +63,6 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
             } else if (value === 'Pemesanan Design') {
                 newMessage = designTemplate;
             }
-            // Jika layanan lain, message tetap kosong
-            
             setFormData(prev => ({ ...prev, service: value, message: newMessage }));
         } else {
             setFormData(prev => ({ ...prev, [name]: value }));

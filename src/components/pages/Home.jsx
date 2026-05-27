@@ -15,10 +15,9 @@ import HowToOrderSection from "../layouts/HowToOrder";
 export default function Home() {
   return (
     <>
-      <SEO 
-        title="Jasa Pembuatan Website Surabaya | Averant Team"
-        description="Averant Team - Jasa pembuatan website profesional di Surabaya. Company profile, toko online, landing page, & portfolio. Harga mulai 500rb. Konsultasi gratis!"
-        url="https://averantteam.com/"
+      <SEO
+        serviceName="Jasa Website & Desain Grafis"
+        title="Averant Team - Jasa Website & Desain Grafis Surabaya"
       />
       <Navbar />
       <Hero />
