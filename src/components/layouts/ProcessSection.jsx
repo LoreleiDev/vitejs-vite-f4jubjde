@@ -47,6 +47,15 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
     bg: activeTab === 'website' ? 'bg-blue-50/50' : 'bg-purple-50/50',
     iconBg: activeTab === 'website' ? 'bg-blue-600' : 'bg-purple-600',
     titleText: activeTab === 'website' ? 'text-blue-900' : 'text-purple-900',
+    note: {
+      bg: activeTab === 'website' ? 'bg-blue-50' : 'bg-purple-50',
+      border: activeTab === 'website' ? 'border-blue-200' : 'border-purple-200',
+      iconBg: activeTab === 'website' ? 'bg-blue-100' : 'bg-purple-100',
+      iconText: activeTab === 'website' ? 'text-blue-600' : 'text-purple-600',
+      text: activeTab === 'website' ? 'text-blue-800' : 'text-purple-800',
+      strong: activeTab === 'website' ? 'text-blue-900' : 'text-purple-900',
+      highlight: activeTab === 'website' ? 'text-blue-700' : 'text-purple-700',
+    }
   };
 
   const websiteSteps = [
@@ -107,13 +116,13 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
 
   const currentSteps = activeTab === 'website' ? websiteSteps : designSteps;
   const sectionTitle = activeTab === 'website' ? 'Proses Pengerjaan Website' : 'Proses Pengerjaan Desain';
-  
+
   const currentWhatsappLink = `https://wa.me/${whatsappNumbers[activeTab]}?text=${encodeURIComponent(whatsappMessages[activeTab])}`;
 
   return (
     <section className="py-16 px-4 bg-white select-none">
       <div className="max-w-5xl mx-auto">
-        
+
         {/* Header + Toggle */}
         <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div>
@@ -124,7 +133,7 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
               Transparan, terstruktur, dan komunikatif. Kami pastikan Anda selalu update di setiap tahapan.
             </p>
           </div>
-          
+
           <div className="flex justify-center md:justify-end">
             <div className="inline-flex bg-gray-200/60 p-1.5 rounded-2xl shadow-inner backdrop-blur-sm">
               {tabs.map((tab) => {
@@ -134,11 +143,10 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
                   <button
                     key={tab.id}
                     onClick={() => { setActiveTab(tab.id); setActiveStep(0); }}
-                    className={`cursor-pointer relative flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${
-                      isActive
+                    className={`cursor-pointer relative flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${isActive
                         ? `bg-white ${tab.activeColor} shadow-md`
                         : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
-                    }`}
+                      }`}
                   >
                     <Icon className="w-4 h-4" />
                     {tab.label}
@@ -151,7 +159,7 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
 
         {/* Content */}
         <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-          
+
           {/* Left Side - CTA Card */}
           <div className="bg-linear-to-br from-gray-50 to-gray-100/50 rounded-xl p-6 md:p-8 border border-gray-200">
             <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3">
@@ -160,7 +168,7 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
             <p className="text-gray-600 mb-5 leading-relaxed">
               Tim kami siap membantu Anda memilih paket yang tepat dan menjawab semua pertanyaan seputar proses pengerjaan.
             </p>
-            
+
             <div className="space-y-3 mb-6">
               <div className="flex items-start gap-3">
                 <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${activeTab === 'website' ? 'bg-blue-100' : 'bg-purple-100'}`}>
@@ -186,11 +194,10 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
               href={currentWhatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group inline-flex items-center justify-center gap-2 w-full px-6 py-3 text-white font-medium rounded-lg transition-colors duration-200 ${
-                activeTab === 'website' 
-                  ? 'bg-blue-600 hover:bg-blue-700' 
+              className={`group inline-flex items-center justify-center gap-2 w-full px-6 py-3 text-white font-medium rounded-lg transition-colors duration-200 ${activeTab === 'website'
+                  ? 'bg-blue-600 hover:bg-blue-700'
                   : 'bg-purple-600 hover:bg-purple-700'
-              }`}
+                }`}
             >
               <span>Hubungi via WhatsApp</span>
               <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="currentColor" viewBox="0 0 24 24">
@@ -204,43 +211,38 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
             {currentSteps.map((step, index) => {
               const Icon = step.icon;
               const isActive = activeStep === index;
-              
+
               return (
                 <div
                   key={index}
                   onClick={() => setActiveStep(index)}
-                  className={`rounded-xl border transition-all duration-200 cursor-pointer overflow-hidden ${
-                    isActive
+                  className={`rounded-xl border transition-all duration-200 cursor-pointer overflow-hidden ${isActive
                       ? `${colors.border} ${colors.bg} shadow-sm`
                       : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                  }`}
+                    }`}
                 >
                   <div className="p-4 flex items-start gap-3">
                     {/* Step Number + Icon */}
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                      isActive ? colors.iconBg : 'bg-gray-200 text-gray-600'
-                    } ${isActive ? 'text-white' : ''}`}>
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${isActive ? colors.iconBg : 'bg-gray-200 text-gray-600'
+                      } ${isActive ? 'text-white' : ''}`}>
                       <Icon className="w-4 h-4" />
                     </div>
-                    
+
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2">
-                        <h3 className={`font-medium text-sm md:text-base transition-colors ${
-                          isActive ? colors.titleText : 'text-gray-900'
-                        }`}>
+                        <h3 className={`font-medium text-sm md:text-base transition-colors ${isActive ? colors.titleText : 'text-gray-900'
+                          }`}>
                           {index + 1}. {step.title}
                         </h3>
                         <ChevronDown
-                          className={`w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200 ${
-                            isActive ? 'rotate-180' : ''
-                          }`}
+                          className={`w-4 h-4 text-gray-400 shrink-0 transition-transform duration-200 ${isActive ? 'rotate-180' : ''
+                            }`}
                         />
                       </div>
-                      
+
                       <div
-                        className={`overflow-hidden transition-all duration-300 ${
-                          isActive ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0'
-                        }`}
+                        className={`overflow-hidden transition-all duration-300 ${isActive ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0'
+                          }`}
                       >
                         <p className="text-gray-600 text-sm leading-relaxed">
                           {step.description}
@@ -255,14 +257,15 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
         </div>
 
         {/* Note */}
-        <div className="mt-10 p-4 bg-yellow-50 rounded-lg">
-          <p className="text-sm text-yellow-800 flex items-start gap-2">
-            <span className="text-lg">💡</span>
-            <span>
-              <strong>Catatan:</strong> Timeline pengerjaan bervariasi tergantung kompleksitas project. 
-              Untuk website: 3-14 hari kerja. Untuk desain: 1-5 hari kerja. 
-              Revisi diluar paket dapat dikenakan biaya tambahan.
-            </span>
+        <div className={`${colors.note.bg} ${colors.note.border} border rounded-xl p-4 flex items-start gap-3`}>
+          <span className={`w-5 h-5 rounded-full ${colors.note.iconBg} flex items-center justify-center shrink-0 mt-0.5`}>
+            <span className={`text-xs font-bold font-poppins ${colors.note.iconText}`}>💡</span>
+          </span>
+          <p className={`text-sm leading-relaxed font-poppins ${colors.note.text}`}>
+            <strong className={`font-semibold font-poppins ${colors.note.strong}`}>Catatan:</strong> Timeline pengerjaan bervariasi tergantung kompleksitas project.
+            Untuk website: <span className={`font-medium ${colors.note.highlight}`}>3-14 hari kerja</span>.
+            Untuk desain: <span className={`font-medium ${colors.note.highlight}`}>1-5 hari kerja</span>.
+            Revisi diluar paket dapat dikenakan <span className={`font-medium ${colors.note.highlight}`}>biaya tambahan</span>.
           </p>
         </div>
       </div>

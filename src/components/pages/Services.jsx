@@ -45,7 +45,8 @@ const websiteServices = [
     description: "Halaman promosi tunggal yang konversif untuk campaign, product launch, atau lead generation.",
     features: ["1 Halaman Utama", "Mobile Friendly", "Basic SEO"],
     addOns: 10,
-    price: "1.500.000",
+    price: "1.200.000",
+    priceType: "fixed",
     bestFor: ["Startup launching produk", "Campaign iklan", "Webinar promotion"],
     whatsappMessage: createWebsiteMessage("Landing Pages")
   },
@@ -57,6 +58,7 @@ const websiteServices = [
     features: ["5 Halaman Standar", "Form Kontak", "Mobile Responsive"],
     addOns: 12,
     price: "3.500.000",
+    priceType: "fixed",
     bestFor: ["Perusahaan established", "UMKM go digital", "Professional services"],
     whatsappMessage: createWebsiteMessage("Company Profile")
   },
@@ -68,6 +70,7 @@ const websiteServices = [
     features: ["Galeri Portfolio", "Lightbox Preview", "SEO Optimized"],
     addOns: 8,
     price: "2.500.000",
+    priceType: "fixed",
     bestFor: ["Freelance designers", "Photographers", "Creative agencies"],
     whatsappMessage: createWebsiteMessage("Portofolio Website")
   },
@@ -78,7 +81,8 @@ const websiteServices = [
     description: "Solusi tailor-made dengan fitur khusus, skalabilitas tinggi, dan integrasi sistem eksternal.",
     features: ["Desain Full Custom", "Admin Dashboard", "Database Integration"],
     addOns: 15,
-    price: "7.500.000",
+    price: "Sesuai Kebutuhan",
+    priceType: "custom",
     bestFor: ["E-commerce", "SaaS platforms", "Enterprise solutions"],
     whatsappMessage: createWebsiteMessage("Custom Website")
   }
@@ -92,7 +96,8 @@ const designServices = [
     description: "Materi promosi cetak & digital yang eye-catching untuk event, promo, atau branding bisnis.",
     features: ["Resolusi Print & Digital", "Revisi 2x", "Format Siap Cetak"],
     addOns: 5,
-    price: "350.000",
+    price: "15.000",
+    priceType: "fixed",
     bestFor: ["Event organizer", "Promo bisnis", "Campaign sosial media"],
     whatsappMessage: createDesignMessage("Design Flyer & Poster")
   },
@@ -103,7 +108,8 @@ const designServices = [
     description: "Spanduk digital atau cetak dengan komposisi visual menarik untuk iklan, pameran, atau header web.",
     features: ["Layout High-Impact", "Responsive Web/Offline", "Quick Turnaround"],
     addOns: 8,
-    price: "500.000",
+    price: "20.000",
+    priceType: "fixed",
     bestFor: ["Iklan online", "Pameran offline", "Header website"],
     whatsappMessage: createDesignMessage("Design Banner")
   },
@@ -114,7 +120,8 @@ const designServices = [
     description: "Konten visual konsisten & engaging untuk meningkatkan engagement dan brand awareness di Instagram.",
     features: ["Template Konsisten", "Story Highlight Cover", "Panduan Visual IG"],
     addOns: 15,
-    price: "750.000",
+    price: "20.000",
+    priceType: "fixed",
     bestFor: ["Brand Instagram", "Influencer", "UMKM online"],
     whatsappMessage: createDesignMessage("IG Feed & Story")
   },
@@ -125,7 +132,8 @@ const designServices = [
     description: "Identitas visual unik, profesional, dan mudah diingat yang merepresentasikan nilai brand Anda.",
     features: ["3 Konsep Awal", "File Vector (AI/SVG)", "Brand Guideline Mini"],
     addOns: 6,
-    price: "1.200.000",
+    price: "500.000",
+    priceType: "fixed",
     bestFor: ["Brand baru", "Rebranding", "Startup"],
     whatsappMessage: createDesignMessage("Design Logo")
   }
@@ -169,7 +177,7 @@ export default function Services() {
     <>
       <Navbar />
 
-      <section className="py-20 px-4 bg-gray-50 mt-10 select-none" id="services">
+      <section className="py-20 px-4 bg-gray-50 mt-10 select-none font-poppins" id="services">
         <div className="max-w-7xl mx-auto">
 
           {/* Section Toggle - Pill Style */}
@@ -177,33 +185,33 @@ export default function Services() {
             <div className="inline-flex bg-white/80 backdrop-blur-sm p-1.5 rounded-2xl border border-gray-200/60 shadow-sm">
               <button
                 onClick={() => handleSectionChange('website')}
-                className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${activeSection === 'website'
+                className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 font-poppins ${activeSection === 'website'
                   ? 'bg-slate-900 text-white shadow-md scale-[1.02]'
                   : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                   }`}
               >
                 <Monitor className="w-4 h-4" />
-                Website
+                <span className="font-poppins">Website</span>
               </button>
               <button
                 onClick={() => handleSectionChange('design')}
-                className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${activeSection === 'design'
+                className={`cursor-pointer flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 font-poppins ${activeSection === 'design'
                   ? 'bg-slate-900 text-white shadow-md scale-[1.02]'
                   : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                   }`}
               >
                 <Palette className="w-4 h-4" />
-                Design
+                <span className="font-poppins">Design</span>
               </button>
             </div>
           </div>
 
           {/* Header - Dynamic */}
           <div className="text-center max-w-3xl mx-auto mb-12" id={activeSection}>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-poppins">
               {sectionTitle}
             </h1>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-600 max-w-2xl mx-auto font-poppins">
               {sectionDesc}
             </p>
           </div>
@@ -211,7 +219,7 @@ export default function Services() {
           <div
             key={activeSection}
             className={`grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${activeSection === 'website' ? 'xl:grid-cols-4' : 'xl:grid-cols-4'
-              } justify-items-center mb-16 transition-all duration-400 ease-out`}
+              } justify-items-center mb-8 transition-all duration-400 ease-out`}
           >
             {currentServices.map((service) => {
               const Icon = service.icon;
@@ -220,7 +228,7 @@ export default function Services() {
               return (
                 <div
                   key={service.id}
-                  className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 hover:shadow-lg transition-all duration-200 flex flex-col w-full max-w-sm"
+                  className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 hover:shadow-lg transition-all duration-200 flex flex-col w-full max-w-sm font-poppins"
                 >
                   {/* Icon Container */}
                   <div className="w-11 h-11 flex items-center justify-center rounded-lg mb-3 bg-slate-100 text-slate-600">
@@ -228,23 +236,23 @@ export default function Services() {
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-base font-semibold text-gray-900 mb-1">
+                  <h3 className="text-base font-semibold text-gray-900 mb-1 font-poppins">
                     {service.title}
                   </h3>
-                  <p className="text-gray-500 text-sm mb-4 flex-1 leading-relaxed">
+                  <p className="text-gray-500 text-sm mb-4 flex-1 leading-relaxed font-poppins">
                     {service.description}
                   </p>
 
                   {/* Features */}
                   <div className="mb-4">
-                    <h4 className="font-semibold text-gray-900 text-xs uppercase tracking-wide mb-2">
+                    <h4 className="font-semibold text-gray-900 text-xs uppercase tracking-wide mb-2 font-poppins">
                       Fitur Termasuk:
                     </h4>
                     <ul className="space-y-2">
                       {service.features.map((feature, index) => (
-                        <li key={index} className="flex items-center gap-2 text-sm text-gray-600">
+                        <li key={index} className="flex items-center gap-2 text-sm text-gray-600 font-poppins">
                           <Check className="w-4 h-4 text-green-500 shrink-0" />
-                          <span>{feature}</span>
+                          <span className="font-poppins">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -252,15 +260,15 @@ export default function Services() {
 
                   {/* Best For */}
                   <div className="bg-gray-50 rounded-lg p-3 mb-4">
-                    <h4 className="font-semibold text-gray-900 text-xs mb-2 flex items-center">
+                    <h4 className="font-semibold text-gray-900 text-xs mb-2 flex items-center font-poppins">
                       <Globe className="w-4 h-4 mr-2" />
-                      Cocok Untuk:
+                      <span className="font-poppins">Cocok Untuk:</span>
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {service.bestFor.map((item, index) => (
                         <span
                           key={index}
-                          className="text-xs bg-white px-2 py-1 rounded-md text-gray-600 border border-gray-200"
+                          className="text-xs bg-white px-2 py-1 rounded-md text-gray-600 border border-gray-200 font-poppins"
                         >
                           {item}
                         </span>
@@ -268,31 +276,56 @@ export default function Services() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-gray-400 italic mb-4">
+                  <p className="text-xs text-gray-400 italic mb-4 font-poppins">
                     +{service.addOns} fitur add-on tersedia
                   </p>
 
                   {/* Price & Button */}
                   <div className="border-t border-gray-100 pt-4 mt-auto">
                     <div className="text-center mb-4">
-                      <p className="text-sm text-gray-500 mb-1">Perkiraan Harga:</p>
-                      <p className="text-2xl font-bold text-gray-900">
-                        Rp {service.price}
-                      </p>
+                      <p className="text-sm text-gray-500 mb-1 font-poppins">Perkiraan Harga:</p>
+                      {service.priceType === 'custom' ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <p className="text-2xl font-bold text-slate-900 font-poppins">
+                            {service.price}
+                          </p>
+                          <span className="text-xs text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full font-poppins border border-amber-200">
+                            💬 Konsultasi Dulu
+                          </span>
+                        </div>
+                      ) : (
+                        <p className="text-2xl font-bold text-gray-900 font-poppins">
+                          Rp {service.price}
+                        </p>
+                      )}
                     </div>
                     <a
                       href={whatsappLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full px-4 py-3 rounded-lg text-base font-medium text-white transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer bg-slate-900 hover:bg-slate-800 active:bg-slate-950"
+                      className="w-full px-4 py-3 rounded-lg text-base font-medium text-white transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer bg-slate-900 hover:bg-slate-800 active:bg-slate-950 font-poppins"
                     >
-                      Pilih Paket
+                      <span className="font-poppins">Pilih Paket</span>
                       <ArrowRight className="w-4 h-4" />
                     </a>
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* Price Disclaimer Note */}
+          <div className="max-w-3xl mx-auto mb-12 px-4">
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
+              <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
+                <span className="text-blue-600 text-xs font-bold font-poppins">ℹ️</span>
+              </div>
+              <p className="text-sm text-blue-800 font-poppins leading-relaxed">
+                <strong className="font-semibold font-poppins">Catatan Harga:</strong> Harga yang tertera adalah estimasi awal dan dapat dinegosiasikan. 
+                Final pricing akan disesuaikan setelah diskusi mendalam mengenai kelengkapan fitur, kompleksitas proyek, timeline, dan kebutuhan spesifik Anda. 
+                Jangan ragu untuk konsultasi gratis via WhatsApp untuk mendapatkan penawaran terbaik! 🤝
+              </p>
+            </div>
           </div>
 
           {/* CTA Banner - Generic WhatsApp Link */}
@@ -302,7 +335,7 @@ export default function Services() {
 Saya ingin konsultasi tentang layanan di Averant Team. Bisakah saya mendapatkan informasi lebih lanjut?`)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="select-none block w-full pb-5"
+            className="select-none block w-full pb-5 font-poppins"
           >
             <section className="w-full flex items-center justify-center relative z-10 px-4">
               <div className="w-full max-w-7xl mx-auto h-40 md:h-48 relative group cursor-pointer rounded-xl shadow-2xl overflow-hidden">
@@ -325,14 +358,14 @@ Saya ingin konsultasi tentang layanan di Averant Team. Bisakah saya mendapatkan 
 
                 <div className="relative z-10 flex items-center justify-center h-full text-center px-4">
                   <div className="transform transition-all duration-500 group-hover:scale-105">
-                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">
+                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2 font-poppins">
                       Masih Bingung Memilih?
                     </h2>
-                    <p className="text-white/90 mb-6 text-sm md:text-base">
+                    <p className="text-white/90 mb-6 text-sm md:text-base font-poppins">
                       Tidak perlu ragu! Tim konsultan kami siap membantu Anda.
                     </p>
-                    <div className="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-purple-600 rounded-lg text-sm md:text-base font-semibold shadow-lg group-hover:shadow-xl transition-all group-hover:gap-3">
-                      Konsultasi Gratis via WhatsApp
+                    <div className="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-purple-600 rounded-lg text-sm md:text-base font-semibold shadow-lg group-hover:shadow-xl transition-all group-hover:gap-3 font-poppins">
+                      <span className="font-poppins">Konsultasi Gratis via WhatsApp</span>
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                       </svg>
