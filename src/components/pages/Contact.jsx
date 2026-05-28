@@ -134,11 +134,11 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
         const SERVICE_ID = 'service_l8yan5m';
         const PUBLIC_KEY = 'geeibRupqOHjeR76K';
 
-
-        const phoneFormatted = formData.phone
-            ? formData.phone.replace(/(\+\d{1,3})\s?(\d{3,4})\s?(\d{3,4})\s?(\d{3,4})/, '$1 $2-$3-$4')
+        // 🔧 FIX: Bersihkan nomor dari spasi/dash, lalu format dengan pola Indonesia
+        const phoneClean = formData.phone ? formData.phone.replace(/[^\d+]/g, '') : '';
+        const phoneFormatted = phoneClean
+            ? phoneClean.replace(/(\+\d{1,3})(\d{3})(\d{4})(\d{3,4})/, '$1 $2 $3 $4')
             : '-';
-
 
         const templateParams = {
             name: formData.name,
@@ -161,7 +161,6 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                     timer: 3000,
                     timerProgressBar: true,
                 });
-
 
                 setFormData({ name: '', email: '', phone: '', service: '', message: '' });
                 setErrors({ email: '', phone: '' });
