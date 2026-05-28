@@ -3,8 +3,6 @@ import { MessageCircle, Mail, ArrowRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import stock1 from "../../assets/stock.webp";
 
-const LIST_DELAYS = ['delay-200', 'delay-300', 'delay-500', 'delay-700'];
-
 export default function HowToOrderSection() {
     const navigate = useNavigate();
     const sectionRef = useRef(null);
@@ -15,11 +13,11 @@ export default function HowToOrderSection() {
         setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
     };
 
-    
     useEffect(() => {
+
         const observer = new IntersectionObserver(
             ([entry]) => setIsVisible(entry.isIntersecting),
-            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+            { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
         );
 
         if (sectionRef.current) observer.observe(sectionRef.current);
@@ -35,17 +33,17 @@ export default function HowToOrderSection() {
             {/* Background Layer */}
             <div className="absolute inset-0 z-0">
                 <div
-                    className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition duration-700 ease-out ${isVisible ? 'scale-105' : 'scale-100'
-                        }`}
+                    className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition duration-700 ease-out 
+                        ${isVisible ? 'scale-100 md:scale-105' : 'scale-100'}`}
                     style={{ backgroundImage: `url(${stock1})` }}
                 />
                 <div className="absolute inset-0 bg-linear-to-r from-[#7C3AED]/95 to-[#A855F7]/95 opacity-80" />
             </div>
 
             <div className="relative z-10 max-w-4xl mx-auto">
-                {/* Header */}
-                <div className={`text-center mb-12 transition duration-600 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                    }`}>
+                {/* Header: Mobile hanya fade, Desktop pakai slide + fade */}
+                <div className={`text-center mb-12 transition duration-600 ease-out 
+                    ${isVisible ? 'opacity-100 md:translate-y-0' : 'opacity-0 md:-translate-y-4'}`}>
                     <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
                         Cara Memesan Layanan
                     </h2>
@@ -58,7 +56,7 @@ export default function HowToOrderSection() {
                 <div className="grid md:grid-cols-2 gap-6">
                     <Card
                         isVisible={isVisible}
-                        delay="delay-100"
+                        mdDelay="md:delay-100"
                         icon={<MessageCircle className="w-5 h-5 text-gray-700" />}
                         title="Via WhatsApp"
                         steps={[
@@ -74,7 +72,7 @@ export default function HowToOrderSection() {
 
                     <Card
                         isVisible={isVisible}
-                        delay="delay-200"
+                        mdDelay="md:delay-200"
                         icon={<Mail className="w-5 h-5 text-gray-700" />}
                         title="Via Email / Form"
                         steps={[
@@ -90,7 +88,7 @@ export default function HowToOrderSection() {
                 </div>
             </div>
 
-            {/* Floating Dots - Hanya Desktop */}
+            {/* Floating Dots - Tetap Hanya Desktop */}
             {isVisible && (
                 <div className="hidden md:block absolute inset-0 pointer-events-none overflow-hidden z-0">
                     {[...Array(5)].map((_, i) => (
@@ -111,11 +109,15 @@ export default function HowToOrderSection() {
     );
 }
 
+function Card({ isVisible, mdDelay, icon, title, steps, buttonText, onButtonClick, buttonIcon: BtnIcon }) {
 
-function Card({ isVisible, delay, icon, title, steps, buttonText, onButtonClick, buttonIcon: BtnIcon }) {
+    const listMdDelays = ['md:delay-200', 'md:delay-300', 'md:delay-500', 'md:delay-700'];
+
     return (
-        <div className={`transition duration-600 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            } ${delay}`}>
+        <div className={`transition duration-600 ease-out 
+            ${isVisible ? 'opacity-100 md:translate-y-0' : 'opacity-0 md:translate-y-8'} 
+            ${mdDelay}`}>
+
             <div className="border border-white/30 rounded-xl p-6 bg-white/95 backdrop-blur-sm shadow-lg flex flex-col h-full
                           transition duration-300 
                           md:hover:shadow-xl md:hover:-translate-y-1.5 md:hover:border-purple-300">
@@ -130,8 +132,9 @@ function Card({ isVisible, delay, icon, title, steps, buttonText, onButtonClick,
                     {steps.map((step, idx) => (
                         <li
                             key={idx}
-                            className={`flex gap-3 text-sm text-gray-700 leading-relaxed transition duration-500 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-                                } ${LIST_DELAYS[idx] || 'delay-700'}`}
+                            className={`flex gap-3 text-sm text-gray-700 leading-relaxed transition duration-500 ease-out 
+                                ${isVisible ? 'opacity-100 md:translate-x-0' : 'opacity-0 md:-translate-x-4'} 
+                                ${listMdDelays[idx] || 'md:delay-700'}`}
                         >
                             <span className="shrink-0 w-5 h-5 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center text-[11px] font-semibold">
                                 {idx + 1}
