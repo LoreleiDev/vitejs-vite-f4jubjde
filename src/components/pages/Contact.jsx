@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import Swal from 'sweetalert2'; 
+import Swal from 'sweetalert2';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import BackToTop from "../features/BackToTop";
@@ -15,6 +17,12 @@ export default function Contact() {
         service: '',
         message: '',
     });
+
+    const [errors, setErrors] = useState({
+        email: '',
+        phone: '',
+    });
+
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const services = [
@@ -25,7 +33,6 @@ export default function Contact() {
         'Pertanyaan Umum',
     ];
 
-    // ✅ Template pesan otomatis
     const websiteTemplate = `Halo Averant Team! 👋
 
 Saya ingin konsultasi tentang proses pengerjaan *Website*.
@@ -52,12 +59,20 @@ Saya ingin konsultasi tentang proses pengerjaan *Design*.
 
 Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
 
+    const isValidEmail = (email) => {
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return regex.test(email) &&
+            email.length <= 254 &&
+            !email.startsWith('@') &&
+            !email.endsWith('@') &&
+            email.includes('@');
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        
+
         if (name === 'service') {
             let newMessage = '';
-            
             if (value === 'Pemesanan Website') {
                 newMessage = websiteTemplate;
             } else if (value === 'Pemesanan Design') {
@@ -67,20 +82,76 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
         } else {
             setFormData(prev => ({ ...prev, [name]: value }));
         }
+
+        if (name === 'email' || name === 'phone') {
+            setErrors(prev => ({ ...prev, [name]: '' }));
+        }
+    };
+
+    const handlePhoneChange = (value) => {
+        setFormData(prev => ({ ...prev, phone: value || '' }));
+        setErrors(prev => ({ ...prev, phone: '' }));
+    };
+
+    const validateForm = () => {
+        let isValid = true;
+        const newErrors = { email: '', phone: '' };
+
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email wajib diisi';
+            isValid = false;
+        } else if (!isValidEmail(formData.email)) {
+            newErrors.email = 'Format email tidak valid (contoh: nama@domain.com)';
+            isValid = false;
+        }
+
+        if (formData.phone && !formData.phone.startsWith('+')) {
+            newErrors.phone = 'Nomor telepon tidak valid';
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!validateForm()) {
+            Swal.fire({
+                title: 'Periksa Kembali',
+                text: 'Mohon perbaiki kesalahan pada form sebelum mengirim.',
+                icon: 'warning',
+                confirmButtonColor: '#5B23FF',
+                confirmButtonText: 'OK',
+            });
+            return;
+        }
+
         setIsSubmitting(true);
 
         const TEMPLATE_ID = 'template_6pcc8yx';
         const SERVICE_ID = 'service_l8yan5m';
         const PUBLIC_KEY = 'geeibRupqOHjeR76K';
-        
-        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+
+
+        const phoneFormatted = formData.phone
+            ? formData.phone.replace(/(\+\d{1,3})\s?(\d{3,4})\s?(\d{3,4})\s?(\d{3,4})/, '$1 $2-$3-$4')
+            : '-';
+
+
+        const templateParams = {
+            name: formData.name,
+            email: formData.email,
+            phone: phoneFormatted,
+            service: formData.service,
+            message: formData.message,
+        };
+
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
             .then((result) => {
                 console.log('Email sent:', result.text);
-                
+
                 Swal.fire({
                     title: 'Berhasil!',
                     text: 'Terima kasih! Pesan Anda telah terkirim. Kami akan menghubungi Anda segera.',
@@ -90,12 +161,14 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                     timer: 3000,
                     timerProgressBar: true,
                 });
-                
+
+
                 setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+                setErrors({ email: '', phone: '' });
                 if (formRef.current) formRef.current.reset();
             }, (error) => {
                 console.error('Failed to send:', error.text);
-                
+
                 Swal.fire({
                     title: 'Gagal!',
                     text: 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.',
@@ -114,7 +187,6 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
             <Navbar />
             <div className="mt-16 select-none min-h-screen bg-white text-gray-900 py-20 px-4 md:px-8 lg:px-16">
                 <div className="max-w-6xl mx-auto">
-                    {/* Header */}
                     <div className="text-center mb-16">
                         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
                             Hubungi Kami
@@ -126,7 +198,6 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                        {/* Form Section */}
                         <div className="space-y-6">
                             <div>
                                 <h2 className="text-2xl font-bold mb-2 text-gray-900">Kirim Pesan</h2>
@@ -155,22 +226,61 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5B23FF]/20 focus:border-[#5B23FF] transition-all duration-200 text-gray-900 placeholder-gray-400"
-                                            placeholder="example@email.com"
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#5B23FF]/20 focus:border-[#5B23FF] transition-all duration-200 text-gray-900 placeholder-gray-400 ${errors.email ? 'border-red-500 focus:ring-red-200 focus:border-red-500' : 'border-gray-300'
+                                                }`}
+                                            placeholder="example@domain.com"
                                         />
+                                        {errors.email && (
+                                            <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                                                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                </svg>
+                                                {errors.email}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
+
                                 <div>
                                     <label className="block text-sm font-medium mb-2 text-gray-700">Nomor Telepon</label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5B23FF]/20 focus:border-[#5B23FF] transition-all duration-200 text-gray-900 placeholder-gray-400"
-                                        placeholder="08xx-xxxx-xxxx"
-                                    />
+
+                                    <div className={`relative rounded-lg border transition-all duration-200 bg-white ${errors.phone
+                                            ? 'border-red-500 ring-2 ring-red-200'
+                                            : 'border-gray-300 focus-within:ring-2 focus-within:ring-[#5B23FF]/20 focus-within:border-[#5B23FF]'
+                                        }`}>
+                                        <PhoneInput
+                                            international
+                                            countryCallingCodeEditable={false}
+                                            defaultCountry="ID"
+                                            value={formData.phone}
+                                            onChange={handlePhoneChange}
+                                            className="PhoneInput"
+
+                                            inputProps={{
+                                                name: 'phone',
+                                                required: false,
+                                                autoComplete: 'tel',
+
+                                                style: {
+                                                    color: '#111827',
+                                                },
+                                            }}
+                                        />
+                                    </div>
+
+                                    {errors.phone && (
+                                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
+                                            {errors.phone}
+                                        </p>
+                                    )}
+                                    <p className="mt-1 text-xs text-gray-500">
+                                        Pilih negara & masukkan nomor. Contoh: +62 8xx-xxxx-xxxx.
+                                    </p>
                                 </div>
+
                                 <div>
                                     <label className="block text-sm font-medium mb-2 text-gray-700">Jenis Layanan *</label>
                                     <select
@@ -194,13 +304,11 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
-                                        // ✅ Font normal (tanpa font-mono), leading-relaxed agar nyaman dibaca
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5B23FF]/20 focus:border-[#5B23FF] transition-all duration-200 text-gray-900 placeholder-gray-400 resize-vertical leading-relaxed"
-                                        placeholder={formData.service === 'Pemesanan Website' || formData.service === 'Pemesanan Design' 
-                                            ? "Template akan muncul otomatis..." 
+                                        placeholder={formData.service === 'Pemesanan Website' || formData.service === 'Pemesanan Design'
+                                            ? "Template akan muncul otomatis..."
                                             : "Ceritakan detail konsultasi atau pesanan Anda..."}
                                     ></textarea>
-                                    {/* Helper text */}
                                     {(formData.service === 'Pemesanan Website' || formData.service === 'Pemesanan Design') && (
                                         <p className="text-xs text-gray-500 mt-1.5">
                                             💡 Edit bagian yang kosong, lalu kirim.
@@ -227,13 +335,12 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                             </form>
                         </div>
 
-                        {/* Contact Info Section */}
                         <div className="space-y-6">
                             <div>
                                 <h2 className="text-2xl font-bold mb-2 text-gray-900">Informasi Kontak</h2>
                                 <p className="text-gray-600">Ada pertanyaan? Hubungi kami melalui berbagai cara berikut:</p>
                             </div>
-                            
+
                             <div className="space-y-4">
                                 <div className="flex items-start space-x-4 p-5 border border-gray-200 rounded-lg hover:border-[#5B23FF]/30 hover:shadow-md transition-all duration-200">
                                     <div className="w-10 h-10 bg-[#5B23FF]/10 rounded-lg flex items-center justify-center shrink-0">
@@ -280,7 +387,6 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                                 </div>
                             </div>
 
-                            {/* Working Hours */}
                             <div className="p-5 border border-gray-200 rounded-lg bg-gray-50">
                                 <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
                                     <svg className="w-5 h-5 mr-2 text-[#5B23FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
