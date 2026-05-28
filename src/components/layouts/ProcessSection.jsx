@@ -257,7 +257,7 @@ Mohon informasikan langkah selanjutnya. Terima kasih! `
         </div>
 
         {/* Note */}
-        <div className={`${colors.note.bg} ${colors.note.border} border rounded-xl p-4 flex items-start gap-3`}>
+        <div className={`${colors.note.bg} ${colors.note.border} border rounded-xl mt-4 p-4 flex items-start gap-3`}>
           <span className={`w-5 h-5 rounded-full ${colors.note.iconBg} flex items-center justify-center shrink-0 mt-0.5`}>
             <span className={`text-xs font-bold font-poppins ${colors.note.iconText}`}>💡</span>
           </span>

@@ -196,10 +196,10 @@ export default function Footer() {
                 <div className="mt-12 pt-8 border-t border-gray-800">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                         <p className="text-gray-500 text-sm text-center sm:text-left">
-                            &copy;{currentYear} Averant Team. All rights reserved.
+                            &copy; {currentYear} Averant Team. All rights reserved.
                         </p>
                         <p className="text-gray-500 text-sm flex items-center gap-1">
-                            Built by &copy;Lorelei-Project
+                            Built by Lorelei-Project
                         </p>
                     </div>
                 </div>

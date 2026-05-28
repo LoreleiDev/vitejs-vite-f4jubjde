@@ -10,9 +10,7 @@ export default function ButtonParallaxAbout() {
                         <div className="absolute inset-0 overflow-hidden">
                             <div
                                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                                style={{
-                                    backgroundImage: `url(${stock1})`,
-                                }}
+                                style={{ backgroundImage: `url(${stock1})` }}
                             ></div>
                             <div className="absolute inset-0 bg-linear-to-r from-[#5B23FF] to-[#7C3AED] transition-all duration-300 group-hover:opacity-100 opacity-80"></div>
                         </div>
@@ -23,17 +21,17 @@ export default function ButtonParallaxAbout() {
                             <div className="absolute w-32 h-32 bg-green-200 rounded-full opacity-0 group-hover:opacity-10 group-hover:w-250 group-hover:h-250 transition-all duration-1300 ease-out delay-150"></div>
                         </div>
 
-                        <div className="relative z-10 flex items-center justify-center h-full text-center px-4">
+                        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-3 md:px-4 py-2">
                             <div className="transform transition-all duration-500 group-hover:scale-105">
-                                <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">
+                                <h2 className="text-sm sm:text-base md:text-xl lg:text-2xl font-bold text-white mb-1 md:mb-2 leading-tight">
                                     Siap Membangun Kebutuhan Digital Anda?
                                 </h2>
-                                <p className="text-white/90 mb-6 text-sm md:text-base">
+                                <p className="text-white/90 mb-2 md:mb-3 text-xs md:text-sm leading-snug">
                                     Konsultasikan kebutuhan digital Anda bersama kami.
                                 </p>
-                                <div className="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-[#5B23FF] rounded-lg text-sm md:text-base font-semibold shadow-lg group-hover:shadow-xl transition-all group-hover:gap-3">
+                                <div className="inline-flex items-center gap-1.5 px-4 py-2 md:px-6 md:py-2.5 bg-white text-[#5B23FF] rounded-lg text-xs md:text-sm font-semibold shadow-lg group-hover:shadow-xl transition-all group-hover:gap-3">
                                     Mulai Sekarang
-                                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                     </svg>
                                 </div>
