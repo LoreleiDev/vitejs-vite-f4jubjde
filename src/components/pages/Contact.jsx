@@ -134,11 +134,37 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
         const SERVICE_ID = 'service_l8yan5m';
         const PUBLIC_KEY = 'geeibRupqOHjeR76K';
 
-        // 🔧 FIX: Bersihkan nomor dari spasi/dash, lalu format dengan pola Indonesia
-        const phoneClean = formData.phone ? formData.phone.replace(/[^\d+]/g, '') : '';
-        const phoneFormatted = phoneClean
-            ? phoneClean.replace(/(\+\d{1,3})(\d{3})(\d{4})(\d{3,4})/, '$1 $2 $3 $4')
-            : '-';
+
+        const rawPhone = formData.phone || '';
+        const phoneOnlyDigits = rawPhone.replace(/[^\d]/g, '');
+        const phoneWithPlus = rawPhone.includes('+') ? '+' : '';
+        const phoneClean = phoneWithPlus + phoneOnlyDigits;
+
+
+        let phoneFormatted = '-';
+        if (phoneClean.startsWith('+62') && phoneClean.length >= 11) {
+
+            const numberAfterCode = phoneClean.substring(3);
+
+
+            if (numberAfterCode.length === 11) {
+
+                phoneFormatted = `+62 ${numberAfterCode.slice(0, 3)} ${numberAfterCode.slice(3, 7)} ${numberAfterCode.slice(7)}`;
+            } else if (numberAfterCode.length === 10) {
+
+                phoneFormatted = `+62 ${numberAfterCode.slice(0, 3)} ${numberAfterCode.slice(3, 6)} ${numberAfterCode.slice(6)}`;
+            } else {
+
+                phoneFormatted = phoneClean.replace(/(\+\d{1,3})(\d{3})(\d{3,5})(\d{3,4})/, '$1 $2 $3 $4');
+            }
+        } else if (phoneClean) {
+
+            phoneFormatted = phoneClean.replace(/(\+\d{1,3})(\d{3})(\d{3,5})(\d{3,4})/, '$1 $2 $3 $4');
+        }
+
+        console.log('📱 Raw Phone:', rawPhone);
+        console.log(' Clean Phone:', phoneClean);
+        console.log('✨ Formatted Phone:', phoneFormatted);
 
         const templateParams = {
             name: formData.name,
@@ -244,8 +270,8 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                                     <label className="block text-sm font-medium mb-2 text-gray-700">Nomor Telepon</label>
 
                                     <div className={`relative rounded-lg border transition-all duration-200 bg-white ${errors.phone
-                                            ? 'border-red-500 ring-2 ring-red-200'
-                                            : 'border-gray-300 focus-within:ring-2 focus-within:ring-[#5B23FF]/20 focus-within:border-[#5B23FF]'
+                                        ? 'border-red-500 ring-2 ring-red-200'
+                                        : 'border-gray-300 focus-within:ring-2 focus-within:ring-[#5B23FF]/20 focus-within:border-[#5B23FF]'
                                         }`}>
                                         <PhoneInput
                                             international
