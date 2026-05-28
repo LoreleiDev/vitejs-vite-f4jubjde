@@ -134,37 +134,24 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
         const SERVICE_ID = 'service_l8yan5m';
         const PUBLIC_KEY = 'geeibRupqOHjeR76K';
 
-
         const rawPhone = formData.phone || '';
         const phoneOnlyDigits = rawPhone.replace(/[^\d]/g, '');
         const phoneWithPlus = rawPhone.includes('+') ? '+' : '';
         const phoneClean = phoneWithPlus + phoneOnlyDigits;
 
-
         let phoneFormatted = '-';
         if (phoneClean.startsWith('+62') && phoneClean.length >= 11) {
-
             const numberAfterCode = phoneClean.substring(3);
-
-
             if (numberAfterCode.length === 11) {
-
                 phoneFormatted = `+62 ${numberAfterCode.slice(0, 3)} ${numberAfterCode.slice(3, 7)} ${numberAfterCode.slice(7)}`;
             } else if (numberAfterCode.length === 10) {
-
                 phoneFormatted = `+62 ${numberAfterCode.slice(0, 3)} ${numberAfterCode.slice(3, 6)} ${numberAfterCode.slice(6)}`;
             } else {
-
                 phoneFormatted = phoneClean.replace(/(\+\d{1,3})(\d{3})(\d{3,5})(\d{3,4})/, '$1 $2 $3 $4');
             }
         } else if (phoneClean) {
-
             phoneFormatted = phoneClean.replace(/(\+\d{1,3})(\d{3})(\d{3,5})(\d{3,4})/, '$1 $2 $3 $4');
         }
-
-        console.log('📱 Raw Phone:', rawPhone);
-        console.log(' Clean Phone:', phoneClean);
-        console.log('✨ Formatted Phone:', phoneFormatted);
 
         const templateParams = {
             name: formData.name,
@@ -280,12 +267,10 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                                             value={formData.phone}
                                             onChange={handlePhoneChange}
                                             className="PhoneInput"
-
                                             inputProps={{
                                                 name: 'phone',
                                                 required: false,
                                                 autoComplete: 'tel',
-
                                                 style: {
                                                     color: '#111827',
                                                 },
@@ -321,6 +306,7 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                                         ))}
                                     </select>
                                 </div>
+
                                 <div>
                                     <label className="block text-sm font-medium mb-2 text-gray-700">Pesan *</label>
                                     <textarea
@@ -329,17 +315,32 @@ Mohon informasikan langkah selanjutnya. Terima kasih! 🙏`;
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5B23FF]/20 focus:border-[#5B23FF] transition-all duration-200 text-gray-900 placeholder-gray-400 resize-vertical leading-relaxed"
-                                        placeholder={formData.service === 'Pemesanan Website' || formData.service === 'Pemesanan Design'
-                                            ? "Template akan muncul otomatis..."
-                                            : "Ceritakan detail konsultasi atau pesanan Anda..."}
+                                        disabled={!formData.service}
+                                        className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5B23FF]/20 focus:border-[#5B23FF] transition-all duration-200 text-gray-900 placeholder-gray-400 resize-vertical leading-relaxed ${!formData.service ? 'bg-gray-100 cursor-not-allowed opacity-70' : ''
+                                            }`}
+                                        placeholder={!formData.service
+                                            ? "👆 Pilih jenis layanan terlebih dahulu..."
+                                            : (formData.service === 'Pemesanan Website' || formData.service === 'Pemesanan Design'
+                                                ? "Template akan muncul otomatis..."
+                                                : "Ceritakan detail konsultasi atau pesanan Anda...")
+                                        }
                                     ></textarea>
-                                    {(formData.service === 'Pemesanan Website' || formData.service === 'Pemesanan Design') && (
+
+                                    {/* Helper text */}
+                                    {!formData.service ? (
+                                        <p className="text-xs text-amber-600 mt-1.5 flex items-center gap-1">
+                                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                            </svg>
+                                            Pilih layanan di atas untuk mengisi pesan
+                                        </p>
+                                    ) : (formData.service === 'Pemesanan Website' || formData.service === 'Pemesanan Design') && (
                                         <p className="text-xs text-gray-500 mt-1.5">
                                             💡 Edit bagian yang kosong, lalu kirim.
                                         </p>
                                     )}
                                 </div>
+
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
