@@ -6,7 +6,7 @@ import {
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import BackToTop from "../features/BackToTop";
-import stock1 from "../../assets/stock2.jpg";
+import stock1 from "../../assets/stock2.webp";
 import ButtonParallaxAbout from "../layouts/ButtonParallaxAbout";
 
 import SEO from "../SEO/SEO";

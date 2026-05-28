@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
-import stock1 from "../../assets/stock2.jpg";
+import stock1 from "../../assets/stock2.webp";
 import BackToTop from "../features/BackToTop";
 import SEO from "../SEO/SEO";
 
@@ -144,7 +144,9 @@ export default function Services() {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('website');
-  const whatsappNumber = "6285174116973";
+  const whatsappNumber = activeSection === 'website' 
+    ? "6285174116973" 
+    : "6285708079312";
 
   useEffect(() => {
     const hash = location.hash.replace('#', '');
@@ -361,7 +363,6 @@ Saya ingin konsultasi tentang layanan di Averant Team. Bisakah saya mendapatkan 
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                     style={{
                       backgroundImage: `url(${stock1})`,
-                      backgroundAttachment: 'fixed',
                     }}
                   ></div>
                   <div className="absolute inset-0 bg-linear-to-r from-purple-600 to-blue-600 transition-all duration-300 group-hover:opacity-100 opacity-80"></div>

@@ -1,4 +1,4 @@
-import stock1 from "../../assets/stock2.jpg";
+import stock1 from "../../assets/stock2.webp";
 import { Link } from 'react-router-dom';
 
 export default function ButtonParallaxAbout() {
@@ -12,7 +12,6 @@ export default function ButtonParallaxAbout() {
                                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                                 style={{
                                     backgroundImage: `url(${stock1})`,
-                                    backgroundAttachment: 'fixed',
                                 }}
                             ></div>
                             <div className="absolute inset-0 bg-linear-to-r from-[#5B23FF] to-[#7C3AED] transition-all duration-300 group-hover:opacity-100 opacity-80"></div>
