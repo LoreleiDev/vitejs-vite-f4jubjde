@@ -133,7 +133,7 @@ const designServices = [
     description: "Identitas visual unik, profesional, dan mudah diingat yang merepresentasikan nilai brand Anda.",
     features: ["3 Konsep Awal", "File Vector (AI/SVG)", "Brand Guideline Mini"],
     addOns: 6,
-    price: "500.000",
+    price: "100.000",
     priceType: "fixed",
     bestFor: ["Brand baru", "Rebranding", "Startup"],
     whatsappMessage: createDesignMessage("Design Logo")
